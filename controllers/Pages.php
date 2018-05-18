@@ -1,0 +1,24 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Pages extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the foll
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+    public function view($page = 'home')
+    {
+        if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
+            show_404();
+        }
+        $data['title'] = ucfirst($page);
+        $this->load->view('templates/header',$data);
+        $this->load->view('pages/'.$page,$data);
+        $this->load->view('templates/footer',$data);
+    }
+}
